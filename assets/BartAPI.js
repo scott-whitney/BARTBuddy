@@ -291,7 +291,6 @@ var settings = {
 "x-rapidapi-key": "4d3c51060amsh0a0695795b6f4ccp143077jsn20c66162ae11"
 }
 }
-
 $.ajax(settings).done(function (response) {
 console.log(response);
 for(i=0; i<4; i++){
