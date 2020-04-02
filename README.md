@@ -1,2 +1,0 @@
-# BARTingBuddy
-Project #1 
