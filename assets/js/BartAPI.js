@@ -228,7 +228,7 @@ Abbr: "warm",
 route: "orange, green"
 },
 {
-statioName: "Walnut Creek",
+stationName: "Walnut Creek",
 Abbr: "wcrk",
 route: "Yellow"
 },
@@ -238,7 +238,7 @@ Abbr: "wdud",
 route: ""
 },
 {
-statioName: "West Oakland",
+stationName: "West Oakland",
 Abbr: "woak",
 route: "red, yellow, blue, green"
 }
@@ -297,6 +297,8 @@ var settings = {
 }
 $.ajax(settings).done(function (response) {
             console.log(response);
+            pT = $('<p>').attr('class', 'title').text('Real Time Departures')
+            $('#realTime').append(pT)
             for(i=0; i<4; i++){
             var fare = (response.root.schedule.request.trip[i]['@fare'])
             var orig = (response.root.schedule.request.trip[i]['@origTimeMin'])
@@ -304,10 +306,7 @@ $.ajax(settings).done(function (response) {
             var tt = (response.root.schedule.request.trip[i]['@tripTime'])
 
             div1 = $('<div>').attr('class', 'tile is-child box')
-            // div2 = $('<div>').attr('class', 'tile is-child box')
-            // div3 = $('<div>').attr('class', 'tile is-child box')
-            // div4 = $('<div>').attr('class', 'tile is-child box')
-            pT = $('<p>').attr('class', 'title').text('Real Time Departures')
+         
             p1 = $('<p>').text('Fare Price:' + " " + fare)
             p2 = $('<p>').text('Departing Time:' + " " + orig)
             p3 = $('<p>').text("Arrival Time:" + " " + dest)
@@ -319,7 +318,6 @@ $.ajax(settings).done(function (response) {
             div1.append(p2)
             div1.append(p3)
             div1.append(p4)
-            $('#realTime').append(pT)
             $('#realTime').append(div1)
 
             }
