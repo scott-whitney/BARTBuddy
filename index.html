@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+​
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+​
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+​
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+​
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+​
+        .tile {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+        }
+    </style>
+</head>
+​
+<body>
+​
+    <navbar>BART BUDDY</navbar>
+​
+    <div class="tile is-ancestor">
+        <div class="tile is-6 is-vertical is-parent">
+            <div class="tile is-child box">
+                <!-- <div class="field">
+                    <div class="control">
+                        <label class="label">Type in your Station</label>
+                      <input class="input is-info" type="text" placeholder="Station Name">
+                    </div>
+                </div> -->
+                <div class="field">
+                    <label class="label">Select your Origin Station</label>
+                    <div class="control">
+                        <div class="select">
+                            <select class="origin">
+                                <option>Select Origin</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+​
+                <div class="field">
+                    <label class="label">Select your Destination Station</label>
+                    <div class="control">
+                        <div class="select">
+                            <select class="destiny">
+                                <option>Select Destination</option>
+                               
+                            </select>
+                        </div>
+                        <a class="button is-link" id="bart">
+                            submit
+                          </a>
+                    </div>
+                </div>
+            </div>
+​
+            <div class="tile is-vertical is-child box" id="realTime">
+                <p class="title">Real Time Departures</p>
+
+                </div>
+            </div>
+        <div class="tile is-parent">
+            <div class="tile is-10 is-child box">
+                <p class="title">
+                    <div id="map"></div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK3efbmmMMdKaa_ekHF8LS7oIPGXQV3w8&libraries=places&callback=initMap" async defer></script>
+    <script src="./assets/js/GoogleAPI.js"></script>
+    <script src="./assets/js/BartAPI.js"></script>
+</body>
+​
+</html>
