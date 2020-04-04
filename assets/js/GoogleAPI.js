@@ -189,7 +189,7 @@
         },
         {
         stationName: "Powell St. (SF)",
-        Abbr: "powel",
+        Abbr: "powl",
         route: "red, yellow, blue, green"
         },
         {
@@ -250,20 +250,79 @@
         ]
         
         var choicesArray = [
-            'resturaunts',
-            'bars',
-            'movie theaters',
-            'fun things to do'
+            'resturaunt',
+            'point_of_interest',
+            'lodging',
+            'store'
         ]
 
           var destinystate = 'Bay Area'
+          var addressThis = '';
+function addressTheIssue() {
+
+  if (event.target.matches("a")){
+    console.log('im working')
+    var chosenAddress = $(this).text()
+    console.log(chosenAddress)
+    addressThis = chosenAddress
+    generateNewMap()
+
+
+  }
+  
+
+}
+function generateNewMap() {
+  var map;
+
+  initMap()
+function initMap() {
+  var sydney = new google.maps.LatLng(-33.867, 151.195);
+
+  infowindow = new google.maps.InfoWindow();
+
+  map = new google.maps.Map(
+      document.getElementById('map'), {center: sydney, zoom: 15});
+
+  var request = {
+    query: addressThis,
+    fields: ['name', 'geometry'],
+  };
+
+  var service = new google.maps.places.PlacesService(map);
+
+  service.findPlaceFromQuery(request, function(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+      }
+      map.setCenter(results[0].geometry.location);
+    }
+  });
+}
+}
+
+
+
+
+
 
 $("#bart").on('click', stationSwap);
 
 
+      
+var destinySpot = '';
+
   function stationSwap() {
     destinystate = $('.destiny').val();
-    console.log($('.destiny').val())
+    
+    indexDestiny = bartStationArray.findIndex(x => x.Abbr ===destinystate)
+    console.log(indexDestiny)
+    destinySpot = bartStationArray[indexDestiny].stationName
+    
+    console.log(destinySpot)
+    $('#thingsToDo').empty();
+    $('#thingsToDo').append($('<p>').attr('class', 'title').text('Places:'))
     initMap();
   }
         
@@ -378,7 +437,7 @@ $("#bart").on('click', stationSwap);
         
                 var request1 = {
             // bartstation input
-                    query: destinystate,
+                    query: destinySpot,
                     fields: ['name', 'geometry'],
                 };
         
@@ -411,8 +470,24 @@ $("#bart").on('click', stationSwap);
         
                     function callback(results, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    console.log(results[0].name)
+                    console.log(results[0].vicinity)
+                    console.log(results[0].price_level)
+                    console.log(results[0].rating)
+                    var imgUrl = (results[0].photos[0].getUrl())
+                    var address = (results[0].vicinity)
+                    // var expense = results[0].price_level
+                    // var ratingS = results[0].rating
+
+                    // var pRate = $('<p>').text(ratingS)
+                    // var pExp = $('<p>').text(expense)
+                    var pAdd = $('<a>').text(address).attr('class', 'button is-link randomBtn')
+                    $('#thingsToDo').click(addressTheIssue)
+                    var imgtag = $('<img>').attr('src', imgUrl)
+                    $('#thingsToDo').append(imgtag, pAdd)
                     for (var i = 0; i < results.length; i++) {
                             createMarker(results[i]);
+                            
                             }
                         }
                     }

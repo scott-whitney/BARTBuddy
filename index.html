@@ -11,6 +11,8 @@
     <style>
 
         #map {
+            min-height: 250px;
+            max-height: 900px;
             height: 100%;
             width: 100%;
         }
@@ -66,14 +68,34 @@
             <div class="tile is-vertical is-child box" id="realTime">
                 <p class="title">Real Time Departures</p>
                 </div>
+                <div class="tile is-child box" id="thingsToDo">
+                    <p class="title">Places:</p>
+                </div>
             </div>
-        <div class="tile is-parent">
-            <div class="tile is-10 is-child box">
+
+
+
+
+
+
+        <div class="tile is-6 is-parent">
+            <div class="tile is-12 is-child box">
                 <p class="title">
                     <div id="map"></div>
                 </p>
+                
             </div>
+
+ 
         </div>
+
+
+        
+           
+
+        
+
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK3efbmmMMdKaa_ekHF8LS7oIPGXQV3w8&libraries=places&callback=initMap" async defer></script>

@@ -184,7 +184,7 @@ route: "Yellow"
 },
 {
 stationName: "Powell St. (SF)",
-Abbr: "powel",
+Abbr: "powl",
 route: "red, yellow, blue, green"
 },
 {
