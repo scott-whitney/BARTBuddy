@@ -476,15 +476,17 @@ var destinySpot = '';
                     console.log(results[0].rating)
                     var imgUrl = (results[0].photos[0].getUrl())
                     var address = (results[0].vicinity)
-                    // var expense = results[0].price_level
-                    // var ratingS = results[0].rating
+                    var imgUrl1 = (results[1].photos[0].getUrl())
+                    var address1 = (results[1].vicinity)
 
-                    // var pRate = $('<p>').text(ratingS)
-                    // var pExp = $('<p>').text(expense)
+
+                    var p1Add = $('<a>').text(address1).attr('class', 'button is-link randomBtn')
                     var pAdd = $('<a>').text(address).attr('class', 'button is-link randomBtn')
                     $('#thingsToDo').click(addressTheIssue)
                     var imgtag = $('<img>').attr('src', imgUrl)
+                    var imgtag1 = $('<img>').attr('src', imgUrl1)
                     $('#thingsToDo').append(imgtag, pAdd)
+                    $('#thingsToDo').append(imgtag1, p1Add)
                     for (var i = 0; i < results.length; i++) {
                             createMarker(results[i]);
                             
