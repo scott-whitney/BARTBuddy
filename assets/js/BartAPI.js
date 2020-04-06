@@ -44,7 +44,7 @@ Abbr: 'bayf',
 route: "blue, orange, green"
 },
 {
-stationName: 'Berryessa',
+stationName: 'Berryessa (Not Open Yet)',
 Abbr: 'bery',
 route: ""
 },
@@ -269,21 +269,7 @@ function submission(){
     destinySin = bartStationArray[indexDestiny].Abbr
     console.log(originalSin)
     console.log(destinySin)
-// routePlanner()
 
-
-
-
-
-
-// setting up route information
-// walnut to west oakland
-// var bartOrigStation = bartStationArray[45].Abbr
-// var bartDestStation = bartStationArray[47].Abbr
-// console.log(bartOrigStation)
-// console.log(bartDestStation)
-
-// function routePlanner() {
     var routeUrl = `https://community-bart.p.rapidapi.com/sched.aspx?dest=${destinySin}&orig=${originalSin}&cmd=arrive&json=y`
 var settings = {
 "async": true,
@@ -297,16 +283,16 @@ var settings = {
 }
 $.ajax(settings).done(function (response) {
             console.log(response);
-            pT = $('<p>').attr('class', 'title').text('Real Time Departures')
-            $('#realTime').append(pT)
+            $('#realTime').text('Real Time Departures:')
+            // $('#realTime').append(pT)
             for(i=0; i<4; i++){
             var fare = (response.root.schedule.request.trip[i]['@fare'])
             var orig = (response.root.schedule.request.trip[i]['@origTimeMin'])
             var dest = (response.root.schedule.request.trip[i]['@destTimeMin'])
             var tt = (response.root.schedule.request.trip[i]['@tripTime'])
 
-            div1 = $('<div>').attr('class', 'tile is-child box')
-         
+            div1 = $('<div>').attr('class', 'ui segment')
+            // <div class="ui segment"></div>
             p1 = $('<p>').text('Fare Price:' + " " + fare)
             p2 = $('<p>').text('Departing Time:' + " " + orig)
             p3 = $('<p>').text("Arrival Time:" + " " + dest)
@@ -319,6 +305,7 @@ $.ajax(settings).done(function (response) {
             div1.append(p3)
             div1.append(p4)
             $('#realTime').append(div1)
+           
 
             }
         });

@@ -154,29 +154,31 @@ function initMap() {
 
       function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            console.log(results)
-            for(var i = 0; i<5; i ++){
-                if(results[i].photos){
-                    var imgUrl = results[i].photos[0].getUrl({maxHeight: '200', maxWidth: '150'});
-                    var namePlace = results[i].name
-                    var address = results[i].vicinity;
-                    var divinator = $('<div>')
-                    var pAdd = $("<a>")
-                    .text(address)
-                    .attr("class", "button is-link randomBtn");
-                    var h2tag = $('<h1>').text(namePlace)
-                    var imgtag = $("<img>").attr("src", imgUrl);
-                    var divy = $('<div>').attr('class', 'ui segment')
-                    var imagineDivs = divinator.append(pAdd)
-                    var imagineBart = divy.append(h2tag, imgtag, imagineDivs)
-                    $('#thingsToDo').append(imagineBart)
-                } else {
-                    return;
-                }
+          console.log(results)
+          console.log(results[0].name);
+          console.log(results[0].vicinity);
+          console.log(results[0].price_level);
+          console.log(results[0].rating);
+          if(results[0].photos){
+            var imgUrl = results[0].photos[0].getUrl({maxHeight: '200'});
+          }
+          if(results[1].photos){
+            var imgUrl1 = results[1].photos[0].getUrl({maxHeight: '200'});
+          }
+          var address = results[0].vicinity;
+          var address1 = results[1].vicinity;
 
-            }
-
+          var p1Add = $("<a>")
+            .text(address1)
+            .attr("class", "button is-link randomBtn");
+          var pAdd = $("<a>")
+            .text(address)
+            .attr("class", "button is-link randomBtn");
           $("#thingsToDo").click(addressTheIssue);
+          var imgtag = $("<img>").attr("src", imgUrl);
+          var imgtag1 = $("<img>").attr("src", imgUrl1);
+          $("#thingsToDo").append(imgtag, pAdd);
+          $("#thingsToDo").append(imgtag1, p1Add);
           for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
           }
@@ -487,9 +489,55 @@ $(document).ready(function () {
     },
   ];
 
+  // var choicesArray = ["resturaunt", "point_of_interest", "lodging", "store"];
+
+  // var destinystate = "Bay Area";
+  // var addressThis = "";
+  // function addressTheIssue() {
+  //   if (event.target.matches("a")) {
+  //     console.log("im working");
+  //     var chosenAddress = $(this).text();
+  //     console.log(chosenAddress);
+  //     addressThis = chosenAddress;
+  //     generateNewMap();
+  //   }
+  // }
+  // function generateNewMap() {
+  //   var map;
+
+  //   initMapy();
+  //   function initMapy() {
+  //     console.log("initmap");
+  //     var sydney = new google.maps.LatLng(-33.867, 151.195);
+
+  //     infowindow = new google.maps.InfoWindow();
+
+  //     map = new google.maps.Map(document.getElementById("map"), {
+  //       center: sydney,
+  //       zoom: 15,
+  //     });
+
+  //     var request = {
+  //       query: addressThis,
+  //       fields: ["name", "geometry"],
+  //     };
+
+  //     var service = new google.maps.places.PlacesService(map);
+
+  //     service.findPlaceFromQuery(request, function (results, status) {
+  //       if (status === google.maps.places.PlacesServiceStatus.OK) {
+  //         for (var i = 0; i < results.length; i++) {
+  //           createMarker(results[i]);
+  //         }
+  //         map.setCenter(results[0].geometry.location);
+  //       }
+  //     });
+  //   }
+  // }
 
   $("#bart").on("click", stationSwap);
 
+  // var destinySpot = "";
 
   function stationSwap() {
     destinystate = $(".destiny").val();
@@ -504,4 +552,192 @@ $(document).ready(function () {
     initMap();
   }
 
+ 
+
+  // function initMap() {
+  //   var styledMapType = new google.maps.StyledMapType(
+  //     [
+  //       { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+  //       { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+  //       { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+  //       {
+  //         featureType: "administrative.locality",
+  //         elementType: "labels.text.fill",
+  //         stylers: [{ color: "#d59563" }],
+  //       },
+  //       {
+  //         featureType: "poi",
+  //         elementType: "labels.text.fill",
+  //         stylers: [{ color: "#d59563" }],
+  //       },
+  //       {
+  //         featureType: "poi.park",
+  //         elementType: "geometry",
+  //         stylers: [{ color: "#263c3f" }],
+  //       },
+  //       {
+  //         featureType: "poi.park",
+  //         elementType: "labels.text.fill",
+  //         stylers: [{ color: "#6b9a76" }],
+  //       },
+  //       {
+  //         featureType: "road",
+  //         elementType: "geometry",
+  //         stylers: [{ color: "#38414e" }],
+  //       },
+  //       {
+  //         featureType: "road",
+  //         elementType: "geometry.stroke",
+  //         stylers: [{ color: "#212a37" }],
+  //       },
+  //       {
+  //         featureType: "road",
+  //         elementType: "labels.text.fill",
+  //         stylers: [{ color: "#9ca5b3" }],
+  //       },
+  //       {
+  //         featureType: "road.highway",
+  //         elementType: "geometry",
+  //         stylers: [{ color: "#746855" }],
+  //       },
+  //       {
+  //         featureType: "road.highway",
+  //         elementType: "geometry.stroke",
+  //         stylers: [{ color: "#1f2835" }],
+  //       },
+  //       {
+  //         featureType: "road.highway",
+  //         elementType: "labels.text.fill",
+  //         stylers: [{ color: "#f3d19c" }],
+  //       },
+  //       {
+  //         featureType: "transit",
+  //         elementType: "geometry",
+  //         stylers: [{ color: "#2f3948" }],
+  //       },
+  //       {
+  //         featureType: "transit.station",
+  //         elementType: "labels.text.fill",
+  //         stylers: [{ color: "#d59563" }],
+  //       },
+  //       {
+  //         featureType: "water",
+  //         elementType: "geometry",
+  //         stylers: [{ color: "#17263c" }],
+  //       },
+  //       {
+  //         featureType: "water",
+  //         elementType: "labels.text.fill",
+  //         stylers: [{ color: "#515c6d" }],
+  //       },
+  //       {
+  //         featureType: "water",
+  //         elementType: "labels.text.stroke",
+  //         stylers: [{ color: "#17263c" }],
+  //       },
+  //     ],
+  //     { name: "Dark Mode" }
+  //   );
+  //   var sydney = new google.maps.LatLng(37.7749, 122.4194);
+
+  //   infowindow = new google.maps.InfoWindow();
+
+  //   map = new google.maps.Map(document.getElementById("map"), {
+  //     center: sydney,
+  //     zoom: 15,
+  //     mapTypeControlOptions: {
+  //       mapTypeIds: [
+  //         "roadmap",
+  //         "satellite",
+  //         "hybrid",
+  //         "terrain",
+  //         "styled_map",
+  //         "streetViewControl",
+  //       ],
+  //     },
+  //   });
+  //   map.mapTypes.set("styled_map", styledMapType);
+  //   map.setMapTypeId("styled_map");
+
+  //   var request1 = {
+  //     // bartstation input
+  //     query: destinySpot,
+  //     fields: ["name", "geometry"],
+  //   };
+
+  //   service = new google.maps.places.PlacesService(map);
+
+  //   service.findPlaceFromQuery(request1, function (results, status) {
+  //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+  //       var pyrmont = new google.maps.LatLng(
+  //         results[0].geometry.location.lat(),
+  //         results[0].geometry.location.lng()
+  //       );
+  //       map = new google.maps.Map(document.getElementById("map"), {
+  //         center: pyrmont,
+  //         zoom: 15,
+  //         mapTypeControlOptions: {
+  //           mapTypeIds: [
+  //             "roadmap",
+  //             "satellite",
+  //             "hybrid",
+  //             "terrain",
+  //             "styled_map",
+  //             "streetViewControl",
+  //           ],
+  //         },
+  //       });
+  //       map.mapTypes.set("styled_map", styledMapType);
+  //       map.setMapTypeId("styled_map");
+  //       var request2 = {
+  //         location: pyrmont,
+  //         radius: "500",
+  //         // nearby places search input
+  //         type: [choicesArray[3]],
+  //       };
+  //       service = new google.maps.places.PlacesService(map);
+  //       service.nearbySearch(request2, callback);
+
+  //       function callback(results, status) {
+  //         if (status == google.maps.places.PlacesServiceStatus.OK) {
+  //           console.log(results[0].name);
+  //           console.log(results[0].vicinity);
+  //           console.log(results[0].price_level);
+  //           console.log(results[0].rating);
+  //           var imgUrl = results[0].photos[0].getUrl();
+  //           var address = results[0].vicinity;
+  //           var imgUrl1 = results[1].photos[0].getUrl();
+  //           var address1 = results[1].vicinity;
+
+  //           var p1Add = $("<a>")
+  //             .text(address1)
+  //             .attr("class", "button is-link randomBtn");
+  //           var pAdd = $("<a>")
+  //             .text(address)
+  //             .attr("class", "button is-link randomBtn");
+  //           $("#thingsToDo").click(addressTheIssue);
+  //           var imgtag = $("<img>").attr("src", imgUrl);
+  //           var imgtag1 = $("<img>").attr("src", imgUrl1);
+  //           $("#thingsToDo").append(imgtag, pAdd);
+  //           $("#thingsToDo").append(imgtag1, p1Add);
+  //           for (var i = 0; i < results.length; i++) {
+  //             createMarker(results[i]);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
+
+  // function createMarker(place) {
+  //   var marker = new google.maps.Marker({
+  //     map: map,
+  //     position: place.geometry.location,
+  //   });
+
+  //   google.maps.event.addListener(marker, "click", function () {
+  //     infowindow.setContent(place.name);
+  //     infowindow.open(map, this);
+  //   });
+  // }
 });
