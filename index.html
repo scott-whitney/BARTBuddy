@@ -2,11 +2,11 @@
 <html>
 ​
 <head>
-    <title>Simple Map</title>
+    <title>BART BUDDY</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 ​
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
 ​
     <style>
         /* Always set the map height explicitly to define the size of the div
@@ -32,60 +32,41 @@
     </style>
 </head>
 ​
-<body>
-​
-    <navbar>BART BUDDY</navbar>
-​
-    <div class="tile is-ancestor">
-        <div class="tile is-6 is-vertical is-parent">
-            <div class="tile is-child box">
-                <!-- <div class="field">
-                    <div class="control">
-                        <label class="label">Type in your Station</label>
-                      <input class="input is-info" type="text" placeholder="Station Name">
-                    </div>
-                </div> -->
-                <div class="field">
-                    <label class="label">Select your Origin Station</label>
-                    <div class="control">
-                        <div class="select">
-                            <select class="origin">
-                                <option>Select Origin</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-​
-                <div class="field">
-                    <label class="label">Select your Destination Station</label>
-                    <div class="control">
-                        <div class="select">
-                            <select class="destiny">
-                                <option>Select Destination</option>
-                               
-                            </select>
-                        </div>
-                        <a class="button is-link" id="bart">
-                            submit
-                          </a>
-                    </div>
-                </div>
-            </div>
-​
-            <div class="tile is-vertical is-child box" id="realTime">
-                <p class="title">Real Time Departures</p>
-
-                </div>
-            </div>
-        <div class="tile is-parent">
-            <div class="tile is-10 is-child box">
-                <p class="title">
-                    <div id="map"></div>
-                </p>
-            </div>
+<body>​
+<div class="ui center aligned header">BART BUDDY</div>
+<div class="ui two column stackable grid">
+    <div class="column">
+        <div class="ui segment">
+            <select class="origin">
+                <option>Select Origin</option>
+            </select>
+            <select class="destiny">
+                <option>Select Destination</option>
+            </select>
+            <a class="ui button" id="bart">
+                submit
+            </a>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <div class="column">
+        <div class="ui segment">
+                <div id="map"></div>
+        </div>
+    </div>
+</div>
+<div class="ui one column stackable grid">
+    <div class="column">
+        <div class="ui segment">Real Time Departures
+            <div class="ui segment"></div>
+            <div class="ui segment"></div>
+            <div class="ui segment"></div>
+            <div class="ui segment"></div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK3efbmmMMdKaa_ekHF8LS7oIPGXQV3w8&libraries=places&callback=initMap" async defer></script>
     <script src="./assets/js/GoogleAPI.js"></script>
     <script src="./assets/js/BartAPI.js"></script>
