@@ -1,5 +1,29 @@
 var destinySpot = "";
-var choicesArray = ["resturaunt", "point_of_interest", "lodging", "store"];
+var placeSpot = '';
+var choicesArray = [
+  {Abbr: "food",
+  Name: 'Resturaunts'
+},
+{
+  Abbr: "point_of_interest",
+  Name: "Points of Interest"
+},
+{
+  Abbr: "night_club",
+  Name: 'Night Club' 
+},
+{
+  Abbr: "store",
+  Name: 'Stores'
+}
+];
+
+
+for(i = 0; i<4; i++){
+  nameOfPlace = $('<option>').text(choicesArray[i].Name).attr('value', `${choicesArray[i].Abbr}`)
+  $('.places').append(nameOfPlace)
+  console.log("hellup")
+}
 
 var destinystate = "Bay Area";
 var addressThis = "";
@@ -147,7 +171,7 @@ function initMap() {
         location: pyrmont,
         radius: "500",
         // nearby places search input
-        type: [choicesArray[3]],
+        type: placeSpot,
       };
       service = new google.maps.places.PlacesService(map);
       service.nearbySearch(request2, callback);
@@ -162,6 +186,11 @@ function initMap() {
             "grey button",
             "pink button",
           ];
+          for(i = 0; i<4; i++){
+            nameOfPlace = $('<option>').text(choicesArray[i].Name).attr('value', `${choicesArray[i].Abbr}`)
+            $('.places').append(nameOfPlace)
+            console.log("hellup")
+          }
           for (var i = 0; i < 5; i++) {
             if (results[i].photos) {
               // generator of Dynamic Objects
@@ -185,7 +214,21 @@ function initMap() {
               var imagineBart = divy.append(h2tag, imgtag, imagineDivs);
               $("#thingsToDo").append(imagineBart);
             } else {
-              return;
+              var namePlace = results[i].name;
+              var address = results[i].vicinity;
+              var divinator = $("<div>");
+              var pAdd = $("<a>")
+                .text(address)
+                .attr("class", "button is-link randomBtn");
+                var h2tag = $("<h1>").text(namePlace);
+                var divy = $("<div>").attr(
+                  "class",
+                  `ui segment ${arrayOfColors[i]}`
+                );
+                var imagineDivs = divinator.append(pAdd);
+              var imagineBart = divy.append(h2tag, imagineDivs);
+              $("#thingsToDo").append(imagineBart);
+            
             }
           }
 
@@ -499,14 +542,19 @@ $(document).ready(function () {
 
   function stationSwap() {
     destinystate = $(".destiny").val();
-
+    placeSpot = $('.places').val();
+    console.log(placeSpot)
     indexDestiny = bartStationArray.findIndex((x) => x.Abbr === destinystate);
     console.log(indexDestiny);
     destinySpot = bartStationArray[indexDestiny].stationName;
 
-    console.log(destinySpot);
     $("#thingsToDo").empty();
+
+    placeSelector = $('<select>').attr('class', 'places')
+    placeSelector.append($('<option>').text('Select Places')) 
+    $('#thingsToDo').append(placeSelector)
     $("#thingsToDo").append($("<h2>").attr("class", "title").text("Places:"));
+    
     initMap();
   }
 });
