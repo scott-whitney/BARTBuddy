@@ -154,35 +154,40 @@ function initMap() {
 
       function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            console.log(results)
-            arrayOfColors = [
-              'green button',
-              'yellow button',
-              'blue button',
-              'grey button',
-              'pink button'
-          ]
-            for(var i = 0; i<5; i ++){
-                if(results[i].photos){
-                  // generator of Dynamic Objects
-                    var imgUrl = results[i].photos[0].getUrl({maxHeight: '200', maxWidth: '150'});
-                    var namePlace = results[i].name
-                    var address = results[i].vicinity;
-                    var divinator = $('<div>')
-                    var pAdd = $("<a>")
-                    .text(address)
-                    .attr("class", "button is-link randomBtn");
-                    var h2tag = $('<h1>').text(namePlace)
-                    var imgtag = $("<img>").attr("src", imgUrl);
-                    var divy = $('<div>').attr('class', `ui segment ${arrayOfColors[i]}`)
-                    var imagineDivs = divinator.append(pAdd)
-                    var imagineBart = divy.append(h2tag, imgtag, imagineDivs)
-                    $('#thingsToDo').append(imagineBart)
-                } else {
-                    return;
-                }
-
+          console.log(results);
+          arrayOfColors = [
+            "green button",
+            "yellow button",
+            "red button",
+            "grey button",
+            "pink button",
+          ];
+          for (var i = 0; i < 5; i++) {
+            if (results[i].photos) {
+              // generator of Dynamic Objects
+              var imgUrl = results[i].photos[0].getUrl({
+                maxHeight: "200",
+                maxWidth: "150",
+              });
+              var namePlace = results[i].name;
+              var address = results[i].vicinity;
+              var divinator = $("<div>");
+              var pAdd = $("<a>")
+                .text(address)
+                .attr("class", "button is-link randomBtn");
+              var h2tag = $("<h1>").text(namePlace);
+              var imgtag = $("<img>").attr("src", imgUrl);
+              var divy = $("<div>").attr(
+                "class",
+                `ui segment ${arrayOfColors[i]}`
+              );
+              var imagineDivs = divinator.append(pAdd);
+              var imagineBart = divy.append(h2tag, imgtag, imagineDivs);
+              $("#thingsToDo").append(imagineBart);
+            } else {
+              return;
             }
+          }
 
           $("#thingsToDo").click(addressTheIssue);
           for (var i = 0; i < results.length; i++) {
@@ -247,11 +252,6 @@ function generateNewMap() {
     });
   }
 }
-
-
-
-
-
 
 $(document).ready(function () {
   var bartStationArray = [
@@ -495,9 +495,7 @@ $(document).ready(function () {
     },
   ];
 
-
   $("#bart").on("click", stationSwap);
-
 
   function stationSwap() {
     destinystate = $(".destiny").val();
@@ -511,5 +509,4 @@ $(document).ready(function () {
     $("#thingsToDo").append($("<h2>").attr("class", "title").text("Places:"));
     initMap();
   }
-
 });
