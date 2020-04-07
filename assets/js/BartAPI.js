@@ -303,7 +303,7 @@ $(document).ready(function () {
         p1 = $("<p>").text("Fare Price:" + " " + fare);
         p2 = $("<p>").text("Departing Time:" + " " + orig);
         p3 = $("<p>").text("Arrival Time:" + " " + dest);
-        p4 = $("<p>").text("Travel Time:" + " " + tt);
+        p4 = $("<p>").text("Travel Time:" + " " + tt + " " + 'min');
         console.log(fare);
         console.log(orig);
         div1.append(p1);
