@@ -283,23 +283,26 @@ var settings = {
 }
 $.ajax(settings).done(function (response) {
             console.log(response);
-            $('#realTime').text('Real Time Departures:')
-            // $('#realTime').append(pT)
+            titlery = $('<h2>').text('Real Time Departures:')
+            $('#realTime').append(titlery)
+            arrayOfColors = [
+                'green button',
+                'yellow button',
+                'blue button',
+                'grey button'
+            ]
             for(i=0; i<4; i++){
             var fare = (response.root.schedule.request.trip[i]['@fare'])
             var orig = (response.root.schedule.request.trip[i]['@origTimeMin'])
             var dest = (response.root.schedule.request.trip[i]['@destTimeMin'])
             var tt = (response.root.schedule.request.trip[i]['@tripTime'])
-
-            div1 = $('<div>').attr('class', 'ui segment')
-            // <div class="ui segment"></div>
+            div1 = $('<div>').attr('class', `ui segment ${arrayOfColors[i]}`)
             p1 = $('<p>').text('Fare Price:' + " " + fare)
             p2 = $('<p>').text('Departing Time:' + " " + orig)
             p3 = $('<p>').text("Arrival Time:" + " " + dest)
             p4 = $('<p>').text("Travel Time:" + " " + tt)
             console.log(fare)
             console.log(orig)
-
             div1.append(p1)
             div1.append(p2)
             div1.append(p3)
