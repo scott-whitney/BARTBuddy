@@ -155,8 +155,16 @@ function initMap() {
       function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             console.log(results)
+            arrayOfColors = [
+              'green button',
+              'yellow button',
+              'blue button',
+              'grey button',
+              'pink button'
+          ]
             for(var i = 0; i<5; i ++){
                 if(results[i].photos){
+                  // generator of Dynamic Objects
                     var imgUrl = results[i].photos[0].getUrl({maxHeight: '200', maxWidth: '150'});
                     var namePlace = results[i].name
                     var address = results[i].vicinity;
@@ -166,7 +174,7 @@ function initMap() {
                     .attr("class", "button is-link randomBtn");
                     var h2tag = $('<h1>').text(namePlace)
                     var imgtag = $("<img>").attr("src", imgUrl);
-                    var divy = $('<div>').attr('class', 'ui segment')
+                    var divy = $('<div>').attr('class', `ui segment ${arrayOfColors[i]}`)
                     var imagineDivs = divinator.append(pAdd)
                     var imagineBart = divy.append(h2tag, imgtag, imagineDivs)
                     $('#thingsToDo').append(imagineBart)
@@ -500,7 +508,7 @@ $(document).ready(function () {
 
     console.log(destinySpot);
     $("#thingsToDo").empty();
-    $("#thingsToDo").append($("<p>").attr("class", "title").text("Places:"));
+    $("#thingsToDo").append($("<h2>").attr("class", "title").text("Places:"));
     initMap();
   }
 
