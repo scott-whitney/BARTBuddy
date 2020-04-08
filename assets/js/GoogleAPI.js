@@ -1,3 +1,19 @@
+
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+var grammar = '#JSGF V1.0;'
+var recognition = new SpeechRecognition();
+var speechRecognitionList = new SpeechGrammarList();
+speechRecognitionList.addFromString(grammar, 1);
+recognition.grammars = speechRecognitionList;
+recognition.lang = 'en-US';
+recognition.interimResults = false;
+
+
+
+
+
+
 var destinySpot = "";
 var placeSpot = '';
 var choicesArray = [
@@ -196,6 +212,8 @@ function initMap() {
               // generator of Dynamic Objects
               var imgUrl = results[i].photos[0].getUrl({
                 maxHeight: "200",
+                minHeight: '200',
+                minWidth: '150',
                 maxWidth: "150",
               });
               var namePlace = results[i].name;
@@ -204,12 +222,12 @@ function initMap() {
               var pAdd = $("<a>")
                 .text(address)
                 .attr("class", "button is-link randomBtn");
-              var h2tag = $("<h1>").text(namePlace);
+              var h2tag = $("<p>").text(namePlace);
               var imgtag = $("<img>").attr("src", imgUrl);
               var divy = $("<div>").attr(
                 "class",
-                `ui segment ${arrayOfColors[i]}`
-              );
+                `ui segment ${arrayOfColors[i]} `
+              ).attr('style', 'width: 300 height: 300');
               var imagineDivs = divinator.append(pAdd);
               var imagineBart = divy.append(h2tag, imgtag, imagineDivs);
               $("#thingsToDo").append(imagineBart);
@@ -220,11 +238,11 @@ function initMap() {
               var pAdd = $("<a>")
                 .text(address)
                 .attr("class", "button is-link randomBtn");
-                var h2tag = $("<h1>").text(namePlace);
+                var h2tag = $("<p>").text(namePlace);
                 var divy = $("<div>").attr(
                   "class",
                   `ui segment ${arrayOfColors[i]}`
-                );
+                ).attr('style', 'width: 300 height: 300');
                 var imagineDivs = divinator.append(pAdd);
               var imagineBart = divy.append(h2tag, imagineDivs);
               $("#thingsToDo").append(imagineBart);
@@ -297,6 +315,36 @@ function generateNewMap() {
 }
 
 $(document).ready(function () {
+
+  recognition.onresult = function (event) {
+    var last = event.results.length - 1;
+    var command = event.results[last][0].transcript;
+    message.textContent = 'Voice Input: ' + command + '.';
+    if (command.toLowerCase() === 'submit', 'Bart buddy, show me what you got') {
+        // stationSwap();
+        console.log('Im working');
+        console.log(command.toLowerCase);
+        console.log(event.results[last][0].transcript);
+        stationSwap()
+        message.textContent = "";
+  
+    };
+    recognition.onspeechend = function () {
+        recognition.stop();
+    };
+    recognition.onerror = function (event) {
+        message.textContent = 'Error occurred in recognition: ' + event.error;
+    }
+  
+  }
+  
+  document.querySelector('#btnGiveCommand').addEventListener('click', function () {
+    recognition.start();
+  });
+
+
+
+
   var bartStationArray = [
     {
       stationName: "12th St. Oakland City Center",

@@ -1,0 +1,84 @@
+#bart {
+    background-color: ;
+    color: black;
+    
+}
+#header {
+    /* background-color:  #006699; */
+    /* height: 150%;
+    width: 100%; */
+    padding-top: 60px;
+    color: #F7F7F7;
+    font-size: 3rem;
+    /* box-shadow: 2px 2px darkgray; */
+    text-shadow: 2px 2px black;
+    /* border-radius: 5%; */
+    font-family: 'PT Sans Narrow', sans-serif;
+    /* box-shadow: 2px 2px black; */
+}
+
+#stacks, h2, #realTime  {
+    background-color: #F7F7F7;
+    font-size: medium;
+    width: 100%;
+   
+    /* border-radius: 1px; */
+    /* color: whitesmoke; */
+}
+
+ .superFunTime{
+    
+    /* border-radius: 1%;
+   
+    float: center;
+    display: inherit; */
+    background-color: #3B5998;
+	padding: 3rem;
+	border-radius: 1rem;
+	/* border: .5px solid  #DFE3EE; */
+    
+}
+
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color:#F7F7F7;
+    /* opacity: 99%; */
+    /* background-image: url("https://www.saintmaryschs.org/wp-content/uploads/bart_colorfield.jpg");
+  
+    background-position: left;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    background-size: cover;  */
+    
+    
+    
+}
+#map {
+    min-height: 250px;
+    max-height: 900px;
+    height: 100%;
+    width: 100%;
+    
+
+    
+
+}
+​
+/* Optional: Makes the sample page fill the window. */
+
+​
+.tile {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+h1{
+    font-size: 90px;
+    font-family: 'Josefin Sans', sans-serif;
+}
